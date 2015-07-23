@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Laravel</title>
+	<title>E-Commerce o melhor para o seu bolso</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 
@@ -33,6 +33,10 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
+				<ul class="nav navbar-nav">
+					<li><a href="{{ route('category') }}">Category</a></li>
+					<li><a href="{{ route('product') }}">Product</a></li>
+				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
 						<li><a href="{{ url('/auth/login') }}">Login</a></li>
@@ -50,7 +54,11 @@
 		</div>
 	</nav>
 
-	@yield('content')
+	<main class="container-fluid">
+		@yield('content')
+	</main>
+
+
 
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
