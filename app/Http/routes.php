@@ -17,7 +17,7 @@ Route::get('/',['as'=>'home',function(){
 /*
  * rotas para admin incluindo produtos e categorias
  */
-Route::group(['prefix'=>'admin'],function(){
+Route::group(['prefix'=>'admin','where'=>['id'=>'[1-9]+']],function(){
 
     /*
      * rotas de categorias
@@ -27,6 +27,10 @@ Route::group(['prefix'=>'admin'],function(){
         get('/',['as'=>'category','uses'=>'CategoriesController@index']);
         get('/create',['as'=>'category.create','uses'=>'CategoriesController@create']);
         post('/',['as'=>'category.store','uses'=>'CategoriesController@store']);
+        get('/{id?}/edit',['as'=>'category.edit','uses'=>'CategoriesController@edit']);
+        get('/{id?}/delete',['as'=>'category.delete','uses'=>'CategoriesController@delete']);
+        put('/{id?}',['as'=>'category.update', 'uses' =>'CategoriesController@update']);
+        get('/{id?}/delete',['as'=>'category.delete','uses'=>'CategoriesController@destroy']);
 
     });
     /*
@@ -35,6 +39,11 @@ Route::group(['prefix'=>'admin'],function(){
     Route::group(['prefix'=>'product'],function(){
 
         get('/',['as'=>'product','uses'=>'ProductsController@index']);
+        get('/create',['as'=>'product.create','uses'=>'ProductsController@create']);
+        post('/',['as'=>'product.store','uses'=>'ProductController@store']);
+        get('/{id?}/edit',['as'=>'product.edit','uses'=>'ProductController@edit']);
+        get('/{id?}/delete',['as'=>'product.delete','uses'=>'ProductController@destroy']);
+
 
     });
 });

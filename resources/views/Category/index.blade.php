@@ -14,27 +14,22 @@
                     <th>ACTION</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td> 1</td>
-                        <td> nome 1</td>
-                        <td> descrição 1</td>
-                        <td> editar | excluir</td>
-                    </tr>
-                    <tr>
-                        <td> 2</td>
-                        <td> nome 2</td>
-                        <td> descrição 2</td>
-                        <td> editar | excluir</td>
-                    </tr>
-                    <tr>
-                        <td> 3</td>
-                        <td> nome 3</td>
-                        <td> descrição 3</td>
-                        <td> editar | excluir</td>
-                    </tr>
+                    @foreach($categories as $category)
+                        <tr>
+                            <td> {{ $category->id }} </td>
+                            <td> {{ $category->name }} </td>
+                            <td> {{ $category->description }}</td>
+                            <td>
+                                <a href="{{ route('category.edit',['id'=>$category->id]) }}"> Editar</a> |
+                                <a href="{{ route('category.delete',['id'=>$category->id]) }}">Excluir</a>
+                            <td>
+                        </tr>
+                    @endforeach()
                 </tbody>
-
             </table>
+            <div class="text-center">
+                {!! $categories->render() !!}
+            </div>
         </section>
     </div>
 @endsection

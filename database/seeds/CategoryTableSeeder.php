@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use ecommerce\Category;
 
-class DatabaseSeeder extends Seeder
+class CategoryTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,11 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
-
-        // $this->call(UserTableSeeder::class);
-        $this->call('CategoryTableSeeder');
-
-        Model::reguard();
+       DB::table('categories')->truncate();
+        factory(Category::class,10)->create();
     }
 }

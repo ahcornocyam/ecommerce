@@ -34,13 +34,13 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 				<ul class="nav navbar-nav">
-					<li><a href="{{ route('category') }}">Category</a></li>
-					<li><a href="{{ route('product') }}">Product</a></li>
+					<li><a href="{{ route('category') }}">Categorias</a></li>
+					<li><a href="{{ route('product') }}">Produtos</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
 						<li><a href="{{ url('/auth/login') }}">Login</a></li>
-						<li><a href="{{ url('/auth/register') }}">Register</a></li>
+						<li><a href="{{ url('/auth/register') }}">Registros</a></li>
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
