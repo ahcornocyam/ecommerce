@@ -2,13 +2,26 @@
 
 namespace ecommerce\Http\Controllers;
 
+use ecommerce\Category;
+use ecommerce\Http\Repositories\Category\CategoryRepository;
+use ecommerce\Http\Repositories\Product\ProductRepository;
 use Illuminate\Http\Request;
-
+use ecommerce\Http\Requests\ProductRequest;
 use ecommerce\Http\Requests;
 use ecommerce\Http\Controllers\Controller;
 
 class ProductsController extends Controller
 {
+    private $repository;
+
+    /**
+     * ProductsController constructor.
+     */
+    public function __construct(ProductRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +29,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('Product.index');
+        $products = $this->repository->listAll();
+        return view('Product.index',compact('products'));
     }
 
     /**
@@ -24,9 +38,10 @@ class ProductsController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(CategoryRepository $category)
     {
-        return view('Product.create');
+        $categories = $category->listName();
+        return view('Product.create',compact('categories'));
     }
 
     /**
@@ -35,9 +50,11 @@ class ProductsController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $input = $request->all();
+        $this->repository->save($input);
+        return redirect()->route('product');
     }
 
     /**
@@ -57,9 +74,11 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($id, CategoryRepository $category)
     {
-        //
+        $categories = $category->listName();
+        $product = $this->repository->find($id);
+        return view('Product.edit',compact('product','categories'));
     }
 
     /**
@@ -69,9 +88,22 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update( ProductRequest $request, $id)
     {
-        //
+        $input = $request->all();
+
+        if (!array_key_exists('featured', $input)) {
+            $input['featured'] = 0;
+        }
+
+        if (!array_key_exists('recommend', $input)) {
+            $input['recommend'] = 0;
+        }
+
+        $this->repository->update($input,$id);
+
+        return redirect()->route('product');
+
     }
 
     /**
@@ -82,6 +114,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $this->repository->delete($id);
+       return redirect()->route('product');
     }
 }

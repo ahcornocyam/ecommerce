@@ -1,6 +1,6 @@
 <div class="form-group-lg">
     {!! Form::label('category','Category:')!!}
-    {!! Form::select('category_id',[1,2,3],null ,['class'=>'form-control'])!!}
+    {!! Form::select('category_id',$categories,null ,['class'=>'form-control'])!!}
 </div>
 <div class="form-group-lg">
     {!! Form::label('name','Name:')!!}

@@ -28,7 +28,6 @@ Route::group(['prefix'=>'admin','where'=>['id'=>'[1-9]+']],function(){
         get('/create',['as'=>'category.create','uses'=>'CategoriesController@create']);
         post('/',['as'=>'category.store','uses'=>'CategoriesController@store']);
         get('/{id?}/edit',['as'=>'category.edit','uses'=>'CategoriesController@edit']);
-        get('/{id?}/delete',['as'=>'category.delete','uses'=>'CategoriesController@delete']);
         put('/{id?}',['as'=>'category.update', 'uses' =>'CategoriesController@update']);
         get('/{id?}/delete',['as'=>'category.delete','uses'=>'CategoriesController@destroy']);
 
@@ -40,9 +39,10 @@ Route::group(['prefix'=>'admin','where'=>['id'=>'[1-9]+']],function(){
 
         get('/',['as'=>'product','uses'=>'ProductsController@index']);
         get('/create',['as'=>'product.create','uses'=>'ProductsController@create']);
-        post('/',['as'=>'product.store','uses'=>'ProductController@store']);
-        get('/{id?}/edit',['as'=>'product.edit','uses'=>'ProductController@edit']);
-        get('/{id?}/delete',['as'=>'product.delete','uses'=>'ProductController@destroy']);
+        post('/',['as'=>'product.store','uses'=>'ProductsController@store']);
+        get('/{id?}/edit',['as'=>'product.edit','uses'=>'ProductsController@edit']);
+        put('/{id?}',['as'=>'product.update', 'uses' =>'ProductsController@update']);;
+        get('/{id?}/delete',['as'=>'product.delete','uses'=>'ProductsController@destroy']);
 
 
     });

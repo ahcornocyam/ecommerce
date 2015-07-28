@@ -10,6 +10,7 @@
                     <thead>
                         <th>ID</th>
                         <th>NOME</th>
+                        <th>DESCRIÇÃO</th>
                         <th>PREÇO</th>
                         <th>DESTAQUE</th>
                         <th>RECOMENDADO</th>
@@ -17,32 +18,26 @@
                         <th>ACTION</th>
                     </thead>
                     <tbody>
+                    @foreach($products as $product)
                         <tr>
-                            <td>1</td>
-                            <td>produto 1</td>
-                            <td>R$: 10,00</td>
-                            <td>sim</td>
-                            <td>sim</td>
-                            <td>categoria 1</td>
+                            <td> {{ $product->id }} </td>
+                            <td> {{ $product->name }} </td>
+                            <td> {{ $product->description }} </td>
+                            <td> R$: {{ $product->price }} </td>
+                            <td> {{ ($product->featured)? 'sim' : 'não' }} </td>
+                            <td> {{ ($product->recommend)? 'sim': 'não' }} </td>
+                            <td> {{ $product->category->name}} </td>
                             <td>
-                                <a href="">Editar</a> |
-                                <a href="">Excluir</a>
+                                <a href="{{ route('product.edit',['id'=>$product->id]) }}">Editar</a> |
+                                <a href="{{ route('product.delete',['id'=>$product->id]) }}">Excluir</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>produto 2</td>
-                            <td>R$: 10,00</td>
-                            <td>sim</td>
-                            <td>não</td>
-                            <td>categoria 2</td>
-                            <td>
-                                <a href="">Editar</a> |
-                                <a href="">Excluir</a>
-                            </td>
-                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
+                <div class="text-center">
+                    {!! $products->render() !!}
+                </div>
             </section>
         </div>
     @endsection

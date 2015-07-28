@@ -40,4 +40,9 @@ class CategoryRepository
 
         $this->find($id)->delete();
     }
+
+    public function listName(){
+        return $this->model->lists('name','id');
+    }
+
 }
