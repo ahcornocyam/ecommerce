@@ -2,9 +2,9 @@
         {!! Form::label('name','Nome:') !!}
         {!! Form::text('name',null,['class'=>'form-control']) !!}
     </div>
-    <div class="form-group-lgS">
+    <div class="">
         {!! Form::label('description','Descrição:') !!}
-        {!! Form::textarea('description',null,['class'=>'form-control']) !!}
+        {!! Form::textarea('description',null,['class'=>'form-control','rows'=>'5']) !!}
     </div>
     <div class="form-group-lg">
         {!! Form::submit('Salvar',['class'=>'btn btn-lg btn-primary']) !!}
