@@ -4,29 +4,19 @@ namespace ecommerce\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use ecommerce\Http\Requests\CategoryRequest;
+use ecommerce\Http\Requests;
 use ecommerce\Http\Controllers\Controller;
-use ecommerce\Http\Repositories\Category\CategoryRepository;
 
-
-class CategoriesController extends Controller
+class ProductImage extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    private $repository;
-
-    public function __construct(CategoryRepository $repository){
-        $this->repository = $repository;
-    }
     public function index()
     {
-        $categories  = $this->repository
-                                        ->listAll();
-        return view('Category.index',compact('categories'));
-
+        //
     }
 
     /**
@@ -36,9 +26,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-
-        return view('Category.create');
-
+        //
     }
 
     /**
@@ -47,13 +35,9 @@ class CategoriesController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(CategoryRequest $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
-
-        $this->repository->save($input);
-
-        return redirect()->route('category');
+        //
     }
 
     /**
@@ -75,9 +59,7 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = $this->repository
-                                    ->find($id);
-        return view('Category.edit',compact('category'));
+        //
     }
 
     /**
@@ -87,13 +69,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $input = $request->all();
-        $this->repository
-                        ->update($input,$id);
-
-        return redirect()->route('category');
+        //
     }
 
     /**
@@ -104,8 +82,6 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $this->repository
-                        ->delete($id);
-        return redirect()->route('category');
+        //
     }
 }

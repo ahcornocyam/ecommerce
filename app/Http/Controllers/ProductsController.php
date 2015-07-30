@@ -29,7 +29,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = $this->repository->listAll();
+        $products = $this->repository
+                                    ->listAll();
         return view('Product.index',compact('products'));
     }
 
@@ -53,7 +54,8 @@ class ProductsController extends Controller
     public function store(ProductRequest $request)
     {
         $input = $request->all();
-        $this->repository->save($input);
+        $this->repository
+                        ->save($input);
         return redirect()->route('product');
     }
 
@@ -77,7 +79,8 @@ class ProductsController extends Controller
     public function edit($id, CategoryRepository $category)
     {
         $categories = $category->listName();
-        $product = $this->repository->find($id);
+        $product = $this->repository
+                                    ->find($id);
         return view('Product.edit',compact('product','categories'));
     }
 
@@ -114,7 +117,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-       $this->repository->delete($id);
+       $this->repository
+                        ->delete($id);
        return redirect()->route('product');
     }
 }

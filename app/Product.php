@@ -28,4 +28,12 @@ class Product extends Model
     public function category(){
         return $this->belongsTo('\ecommerce\Category');
     }
+
+    /*
+     * Relacionamento com produtimage
+     */
+
+    public function productImage(){
+        return $this->hasMany('\ecommerce\ProductImage');
+    }
 }

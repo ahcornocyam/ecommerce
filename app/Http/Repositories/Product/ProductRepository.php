@@ -10,6 +10,7 @@ class ProductRepository
      * ProductRepository constructor.
      */
     private $model;
+
     public function __construct(Product $repository)
     {
         $this->model = $repository;
@@ -17,12 +18,18 @@ class ProductRepository
 
     public function listAll(){
 
-        return $this->model->paginate(10);
+        $products =  $this->model
+                                ->with('Category')
+                                ->join('categories','categories.id','=','products.category_id')
+                                ->paginate(10);
+        return $products;
+
     }
 
     public function save($request){
 
-        $product = $this->model->fill($request);
+        $product = $this->model
+                                ->fill($request);
         $product->save();
     }
     public function find($id){
@@ -32,13 +39,13 @@ class ProductRepository
     }
 
     public function update($request, $id){
-        $this->find($id)->update($request);
+        $this->find($id)
+                        ->update($request);
     }
 
     public function delete($id){
 
         $this->find($id)->delete();
     }
-
 
 }
