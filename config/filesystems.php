@@ -49,7 +49,7 @@ return [
         ],
         'local_public' => [
             'driver' => 'local',
-            'root'   =>public_path().'/uploads/',
+            'root'   =>public_path().'/uploads',
         ],
 
         'ftp' => [

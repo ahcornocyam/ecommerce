@@ -43,7 +43,17 @@ Route::group(['prefix'=>'admin','where'=>['id'=>'[1-9]+']],function(){
         get('/{id?}/edit',['as'=>'product.edit','uses'=>'ProductsController@edit']);
         put('/{id?}',['as'=>'product.update', 'uses' =>'ProductsController@update']);;
         get('/{id?}/delete',['as'=>'product.delete','uses'=>'ProductsController@destroy']);
+    });
 
+    /*
+     * Rotas para images
+     */
+    Route::group(['prefix'=>'images'],function($id){
+
+        get('{id?}/product',['as'=>'images', 'uses'=>'ProductImageController@index']);
+        get('create/{id?}/product',['as'=>'images.create', 'uses'=> 'ProductImageController@create']);
+        post('{id}/product',['as'=>'images.store', 'uses' =>'ProductImageController@store']);
+        get('destroy/{id?}/product',['as'=>'images.destroy', 'uses' =>'ProductImageController@destroy']);
 
     });
 });

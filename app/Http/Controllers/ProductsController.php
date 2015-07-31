@@ -13,13 +13,15 @@ use ecommerce\Http\Controllers\Controller;
 class ProductsController extends Controller
 {
     private $repository;
+    private $categoryRepository;
 
     /**
      * ProductsController constructor.
      */
-    public function __construct(ProductRepository $repository)
+    public function __construct(ProductRepository $repository, CategoryRepository $categoryRepository)
     {
-        $this->repository = $repository;
+        $this->repository           = $repository;
+        $this->categoryRepository   = $categoryRepository;
     }
 
     /**
@@ -39,9 +41,10 @@ class ProductsController extends Controller
      *
      * @return Response
      */
-    public function create(CategoryRepository $category)
+    public function create()
     {
-        $categories = $category->listName();
+        $categories = $this->categoryRepository
+                                            ->listName();
         return view('Product.create',compact('categories'));
     }
 
@@ -76,9 +79,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id, CategoryRepository $category)
+    public function edit($id)
     {
-        $categories = $category->listName();
+        $categories = $this->categoryRepository->listName();
         $product = $this->repository
                                     ->find($id);
         return view('Product.edit',compact('product','categories'));

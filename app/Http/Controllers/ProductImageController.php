@@ -2,21 +2,39 @@
 
 namespace ecommerce\Http\Controllers;
 
+use ecommerce\Http\Repositories\Product\ProductRepository;
+use ecommerce\Http\Repositories\ProductImage\ProductImageRepository;
+use ecommerce\ProductImage;
 use Illuminate\Http\Request;
 
 use ecommerce\Http\Requests;
 use ecommerce\Http\Controllers\Controller;
 
-class ProductImage extends Controller
+class ProductImageController extends Controller
 {
+    private $productsRepository;
+    private $repository;
+
+
+    /**
+     * ProductImageController constructor.
+     */
+    public function __construct(ProductImageRepository $repository, ProductRepository $productRepository)
+    {
+        $this->repository               = $repository;
+        $this->productsRepository       = $productRepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $product = $this->productsRepository->find($id);
+        return view('ProductImage.index',compact('product'));
     }
 
     /**
@@ -24,9 +42,10 @@ class ProductImage extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $product = $this->productsRepository->find($id);
+        return  view('ProductImage.create',compact('product'));
     }
 
     /**
@@ -35,9 +54,11 @@ class ProductImage extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Requests\ProductImageRequest $request, $id)
     {
-        //
+
+        $this->repository->saveImage($request,$id);
+        return redirect()->route('images',['id'=>$id]);
     }
 
     /**
@@ -82,6 +103,6 @@ class ProductImage extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect()->route('images',['id'=>$this->repository->deleteImage($id)]);
     }
 }

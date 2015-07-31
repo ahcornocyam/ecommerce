@@ -19,9 +19,10 @@ class ProductRepository
     public function listAll(){
 
         $products =  $this->model
-                                ->with('Category')
-                                ->join('categories','categories.id','=','products.category_id')
                                 ->paginate(10);
+
+
+
         return $products;
 
     }
@@ -47,5 +48,6 @@ class ProductRepository
 
         $this->find($id)->delete();
     }
+
 
 }

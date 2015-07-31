@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected  $table   = 'Products';
+    protected  $table       = 'Products';
+    protected $primarykey   = 'id';
     protected $fillable =
                             [
                                 'id',
@@ -33,7 +34,7 @@ class Product extends Model
      * Relacionamento com produtimage
      */
 
-    public function productImage(){
+    public function images(){
         return $this->hasMany('\ecommerce\ProductImage');
     }
 }
